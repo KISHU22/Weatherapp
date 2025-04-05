@@ -5,6 +5,24 @@ const searchBox = document.querySelector(".search input");
 const searchBtn = document.querySelector(".search button");
 const weatherIcon = document.querySelector(".weather-icon");
 
+function updateDateTime() {
+    const now = new Date();
+  
+    const optionsDate = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    const formattedDate = now.toLocaleDateString('en-US', optionsDate);
+  
+    const optionsTime = { hour: '2-digit', minute: '2-digit'};
+    const formattedTime = now.toLocaleTimeString('en-US', optionsTime);
+  
+    document.getElementById('date-time').innerHTML = `${formattedDate} | ${formattedTime}`;
+  }
+  
+  // Call once immediately
+  updateDateTime();
+  // Then update every second
+  setInterval(updateDateTime, 1000);
+  
+
 async function checkWeather(city) {
     const response = await fetch(apiUrl + city + `&appid=${apiKey}`);
 
